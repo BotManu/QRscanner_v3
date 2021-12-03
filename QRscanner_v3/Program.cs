@@ -19,4 +19,7 @@ namespace QRscanner_v3
             Application.Run(new Form1());
         }
     }
+
+
+
 }
