@@ -19,6 +19,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using QRscanner_v3;
+using System.Management;
 
 
 
@@ -44,6 +45,19 @@ namespace QRscanner_v3
             base.Dispose(disposing);
         }
 
+        private string AssignSerialPort()
+        {
+            var instances = new ManagementClass("Win32_SerialPort").GetInstances();
+            string PortName = string.Empty;
+            foreach (ManagementObject port in instances)
+            {
+                PortName = port["deviceid"].ToString();
+            }
+            return PortName;
+        }
+
+
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -63,6 +77,7 @@ namespace QRscanner_v3
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -171,6 +186,10 @@ namespace QRscanner_v3
             this.label2.Text = "Output Data";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
+            // serialPort1
+            // 
+            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,6 +213,8 @@ namespace QRscanner_v3
 
         }
 
+        
+
         #endregion
 
         private QRscanner_v3.TextBox textBox1;
@@ -206,6 +227,7 @@ namespace QRscanner_v3
         private System.Windows.Forms.Timer timer1;
         private GroupBox groupBox1;
         private Label label2;
+        private System.IO.Ports.SerialPort serialPort1;
     }
 
     public class TextBox : System.Windows.Forms.TextBox
@@ -214,7 +236,7 @@ namespace QRscanner_v3
 
         public TextBox()
         {
-            this.timer = new System.Timers.Timer(1000);
+            this.timer = new System.Timers.Timer(100);
             this.timer.Elapsed += timer_Elapsed;
         }
 

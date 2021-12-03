@@ -18,6 +18,9 @@ using System.Threading;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using System.IO.Ports;
+using System.Management;
+
 
 namespace QRscanner_v3
 {
@@ -33,54 +36,71 @@ namespace QRscanner_v3
         UInt16 grnPin = 11;
         static Arduino arduino;
 
+        public delegate void AddDataDelegate(String myString);
+        public AddDataDelegate myDelegate;
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            /*
             arduino = new Arduino();
             arduino.pinMode(grnPin, Arduino.OUTPUT);
             arduino.pinMode(yelPin, Arduino.OUTPUT);
             arduino.pinMode(redPin, Arduino.OUTPUT);
+            */
 
             //turn off all lights
             UpdateLight(4);
 
             groupBox1.BackColor = Color.White;
+
+            this.myDelegate = new AddDataDelegate(AddDataMethod);
+
+            AssignSerial();
+            serialPort1.Open();
             
 
+        }
+
+        public void AddDataMethod(String myString)
+        {
+            textBox1.Text=myString;
         }
 
         //color nr: 1:red, 2:yellow, 3:green
         private void UpdateLight(UInt16 color_nr)
         {
+            
             switch (color_nr)
             {
                 case 1:
+                    /*
                     arduino.digitalWrite(grnPin, Arduino.LOW);
                     arduino.digitalWrite(yelPin, Arduino.LOW);
-                    arduino.digitalWrite(redPin, Arduino.HIGH);
+                    arduino.digitalWrite(redPin, Arduino.HIGH);*/
                     groupBox1.BackColor = Color.LightCoral;
                     break;
 
                 case 2:
-                    arduino.digitalWrite(grnPin, Arduino.LOW);
+                    /*arduino.digitalWrite(grnPin, Arduino.LOW);
                     arduino.digitalWrite(redPin, Arduino.LOW);
-                    arduino.digitalWrite(yelPin, Arduino.HIGH);
+                    arduino.digitalWrite(yelPin, Arduino.HIGH);*/
                     groupBox1.BackColor = Color.LightYellow;
                     break;
 
                 case 3:
-                    arduino.digitalWrite(yelPin, Arduino.LOW);
+                    /*arduino.digitalWrite(yelPin, Arduino.LOW);
                     arduino.digitalWrite(redPin, Arduino.LOW);
-                    arduino.digitalWrite(grnPin, Arduino.HIGH);
+                    arduino.digitalWrite(grnPin, Arduino.HIGH);*/
                     groupBox1.BackColor = Color.LightGreen;
                     break;
                 default:
-                    arduino.digitalWrite(yelPin, Arduino.LOW);
+                    /*arduino.digitalWrite(yelPin, Arduino.LOW);
                     arduino.digitalWrite(redPin, Arduino.LOW);
-                    arduino.digitalWrite(grnPin, Arduino.LOW);
+                    arduino.digitalWrite(grnPin, Arduino.LOW);*/
                     break;
             }
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -188,6 +208,24 @@ namespace QRscanner_v3
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;
+            string indata = sp.ReadExisting();
+
+            //string recText = serialPort1.ReadExisting();
+
+            textBox1.Invoke(this.myDelegate, new Object[] { indata });
+        }
+        private void AssignSerial()
+        {
+            var instances = new ManagementClass("Win32_SerialPort").GetInstances();
+            foreach (ManagementObject port in instances)
+            {
+                serialPort1.PortName = port["deviceid"].ToString();
+            }
         }
     }
 
