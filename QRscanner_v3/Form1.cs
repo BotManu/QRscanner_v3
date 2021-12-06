@@ -52,7 +52,8 @@ namespace QRscanner_v3
             //turn off all lights
             UpdateLight(4);
 
-            groupBox1.BackColor = Color.White;
+            this.BackColor = Color.FromArgb(0xca, 0xca, 0xca);
+
 
             this.myDelegate = new AddDataDelegate(AddDataMethod);
 
@@ -78,21 +79,21 @@ namespace QRscanner_v3
                     arduino.digitalWrite(grnPin, Arduino.LOW);
                     arduino.digitalWrite(yelPin, Arduino.LOW);
                     arduino.digitalWrite(redPin, Arduino.HIGH);*/
-                    groupBox1.BackColor = Color.LightCoral;
+                    this.BackColor = Color.FromArgb(0xff, 0x0c, 0x0c);
                     break;
 
                 case 2:
                     /*arduino.digitalWrite(grnPin, Arduino.LOW);
                     arduino.digitalWrite(redPin, Arduino.LOW);
                     arduino.digitalWrite(yelPin, Arduino.HIGH);*/
-                    groupBox1.BackColor = Color.LightYellow;
+                    this.BackColor = Color.FromArgb(0xca, 0xca, 0xca);
                     break;
 
                 case 3:
                     /*arduino.digitalWrite(yelPin, Arduino.LOW);
                     arduino.digitalWrite(redPin, Arduino.LOW);
                     arduino.digitalWrite(grnPin, Arduino.HIGH);*/
-                    groupBox1.BackColor = Color.LightGreen;
+                    this.BackColor = Color.FromArgb(0x51,0xb5,0x49);
                     break;
                 default:
                     /*arduino.digitalWrite(yelPin, Arduino.LOW);
@@ -177,8 +178,9 @@ namespace QRscanner_v3
             }
             else
             {
-                textBox2.Text = "INVALID";
-                textBox3.Text = "INVALID";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                label3.Text = "INVALID";
                 //turn on RED light
                 UpdateLight(1);
                 timer1.Start();
@@ -196,6 +198,7 @@ namespace QRscanner_v3
             textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
+            label3.Text = "";
             UpdateLight(2);
 
         }
@@ -241,6 +244,17 @@ namespace QRscanner_v3
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_BackColorChanged(object sender, EventArgs e)
+        {
+            textBox2.BackColor = this.BackColor;
+            textBox3.BackColor = this.BackColor;
         }
     }
 
