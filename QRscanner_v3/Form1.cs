@@ -20,7 +20,7 @@ using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using System.IO.Ports;
 using System.Management;
-
+using System.Diagnostics;
 
 namespace QRscanner_v3
 {
@@ -162,7 +162,8 @@ namespace QRscanner_v3
                 string QrResult3 = System.Convert.ToBase64String(QrResult2);
                 string final_link = "http://localhost:8000/" + QrResult3;
 
-                CallURL(final_link);
+                //CallURL(final_link);
+                callPyScript(QrResult3);
 
             }
             else if(QrResult.Equals("Close Application"))
@@ -256,6 +257,52 @@ namespace QRscanner_v3
             textBox2.BackColor = this.BackColor;
             textBox3.BackColor = this.BackColor;
         }
+
+        private void callPyScript(string parsedInput)
+        {
+            Process myProcess = new Process();
+
+            //Provide the start information for the process
+            myProcess.StartInfo.FileName = @"pythonw.exe";
+            myProcess.StartInfo.Arguments = @"pyScripts\test_server.py";
+            myProcess.StartInfo.UseShellExecute = false;
+            myProcess.StartInfo.RedirectStandardInput = true;
+            myProcess.StartInfo.RedirectStandardOutput = true;
+
+            //Invoke the process from current process
+            myProcess.Start();
+
+            StreamWriter myStreamWriter = myProcess.StandardInput;
+            myStreamWriter.WriteLine(parsedInput);
+
+            StreamReader myStreamReader=myProcess.StandardOutput;
+            string mycontent=myStreamReader.ReadToEnd();
+
+            //close the process
+            myProcess.WaitForExit();
+            myStreamWriter.Close();
+            myStreamReader.Close();
+            myProcess.Close();
+
+            //verify received string
+            if (mycontent.StartsWith("{"))
+            {
+                Console.WriteLine(mycontent);
+                PersonalData myCurrentData = new PersonalData();
+                myCurrentData.decodeJson(mycontent);
+                if (myCurrentData.Nume != null)
+                    textBox2.Text = myCurrentData.Nume;
+
+                if (myCurrentData.Prenume != null)
+                    textBox3.Text = myCurrentData.Prenume;
+
+                UpdateLight(3);
+            }
+            timer1.Start();
+            
+
+        }
+
     }
 
 
