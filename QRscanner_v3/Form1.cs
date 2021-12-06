@@ -227,6 +227,21 @@ namespace QRscanner_v3
                 serialPort1.PortName = port["deviceid"].ToString();
             }
         }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
 

@@ -69,16 +69,20 @@ namespace QRscanner_v3
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.outBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new QRscanner_v3.TextBox();
-            this.textBox2 = new QRscanner_v3.TextBox();
-            this.textBox1 = new QRscanner_v3.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.textBox3 = new QRscanner_v3.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.textBox2 = new QRscanner_v3.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.textBox1 = new QRscanner_v3.TextBox();
             this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -102,61 +106,6 @@ namespace QRscanner_v3
             this.outBox.TabIndex = 2;
             this.outBox.Visible = false;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(21, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 31);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Nume";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(21, 120);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(123, 31);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Prenume";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(150, 117);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(369, 38);
-            this.textBox3.TabIndex = 5;
-            this.textBox3.TextChangedCompleteDelay = System.TimeSpan.Parse("00:00:01");
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(150, 50);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(369, 38);
-            this.textBox2.TabIndex = 4;
-            this.textBox2.TextChangedCompleteDelay = System.TimeSpan.Parse("00:00:01");
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(70, 10);
-            this.textBox1.MaxLength = 200000;
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(854, 20);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChangedCompleteDelay = System.TimeSpan.Parse("00:00:01");
-            this.textBox1.TextChangedComplete += new System.EventHandler<System.EventArgs>(this.textBox1_TextChangedComplete);
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
             // timer1
             // 
             this.timer1.Interval = 3000;
@@ -164,17 +113,79 @@ namespace QRscanner_v3
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.LightGreen;
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Location = new System.Drawing.Point(70, 69);
+            this.groupBox1.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.groupBox1.Controls.Add(this.panel1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(854, 200);
+            this.groupBox1.Size = new System.Drawing.Size(956, 611);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "OUTPUT";
+            // 
+            // panel1
+            // 
+            this.panel1.AutoSize = true;
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 16);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(300, 200, 300, 200);
+            this.panel1.Size = new System.Drawing.Size(950, 592);
+            this.panel1.TabIndex = 6;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // panel3
+            // 
+            this.panel3.AutoSize = true;
+            this.panel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel3.Controls.Add(this.textBox3);
+            this.panel3.Location = new System.Drawing.Point(252, 291);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(410, 91);
+            this.panel3.TabIndex = 7;
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.Color.White;
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Location = new System.Drawing.Point(30, 30);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(30);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBox3.Size = new System.Drawing.Size(350, 31);
+            this.textBox3.TabIndex = 5;
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox3.TextChangedCompleteDelay = System.TimeSpan.Parse("00:00:01");
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel2.AutoSize = true;
+            this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel2.Controls.Add(this.textBox2);
+            this.panel2.Location = new System.Drawing.Point(282, 156);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(353, 34);
+            this.panel2.TabIndex = 6;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.White;
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(0, 0);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(350, 31);
+            this.textBox2.TabIndex = 4;
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox2.TextChangedCompleteDelay = System.TimeSpan.Parse("00:00:01");
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label2
             // 
@@ -189,6 +200,20 @@ namespace QRscanner_v3
             // serialPort1
             // 
             this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(70, 10);
+            this.textBox1.MaxLength = 200000;
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(854, 20);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.TextChangedCompleteDelay = System.TimeSpan.Parse("00:00:01");
+            this.textBox1.TextChangedComplete += new System.EventHandler<System.EventArgs>(this.textBox1_TextChangedComplete);
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Form1
             // 
@@ -208,6 +233,12 @@ namespace QRscanner_v3
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,12 +253,13 @@ namespace QRscanner_v3
         private System.Windows.Forms.TextBox outBox;
         private TextBox textBox2;
         private TextBox textBox3;
-        private Label label3;
-        private Label label4;
         private System.Windows.Forms.Timer timer1;
         private GroupBox groupBox1;
         private Label label2;
         private System.IO.Ports.SerialPort serialPort1;
+        private Panel panel1;
+        private Panel panel2;
+        private Panel panel3;
     }
 
     public class TextBox : System.Windows.Forms.TextBox
